@@ -1,0 +1,23 @@
+services:
+  dialga:
+    image: chrony_server:latest
+    hostname: dialga
+    networks:
+      zergrush-swarm:
+    ports:
+      - target: 123
+        published: 123
+        protocol: udp
+        mode: host
+    environment:
+      NTP_SERVERS: '0.pool.ntp.org 1.pool.ntp.org time.nist.gov'
+      # ALLOWED_CLIENTS: "10.55.10.0/24"
+    cap_add:
+      - SYS_TIME
+    deploy:
+      placement:
+        constraints: 
+          - node.hostname == totodile
+networks:
+  zergrush-swarm:
+    external: true

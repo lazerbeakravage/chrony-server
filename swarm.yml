@@ -1,9 +1,9 @@
 services:
   dialga:
-    image: chrony_server:latest
+    image: lazerbeakravage/chrony-server:latest
     hostname: dialga
-    networks:
-      zergrush-swarm:
+    # networks:
+    #   zergrush-swarm:
     ports:
       - target: 123
         published: 123
@@ -14,10 +14,10 @@ services:
       # ALLOWED_CLIENTS: "10.55.10.0/24"
     cap_add:
       - SYS_TIME
-    deploy:
-      placement:
-        constraints: 
-          - node.hostname == totodile
-networks:
-  zergrush-swarm:
-    external: true
+    # deploy:
+    #   placement:
+    #     constraints: 
+    #       - node.hostname == totodile
+# networks:
+#   zergrush-swarm:
+#     external: true

@@ -1,12 +1,11 @@
 image:
   name: docker:latest
 
-services:
-  - docker:dind
+# services:
+#   - docker:dind
 
 stages:
   - build
-  - push
 
 variables:
   DOCKER_IMAGE: lazerbeakravage/chrony-server

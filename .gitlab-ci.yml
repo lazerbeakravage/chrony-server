@@ -1,5 +1,8 @@
 image:
-  name: docker:dind
+  name: docker:latest
+
+services:
+  - docker:dind
 
 stages:
   - build

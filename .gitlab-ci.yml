@@ -9,6 +9,8 @@ stages:
 
 variables:
   DOCKER_IMAGE: lazerbeakravage/chrony-server
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_TLS_CERTDIR: ""
 
 build:
   stage: build

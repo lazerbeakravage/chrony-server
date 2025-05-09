@@ -16,10 +16,10 @@ build:
   stage: build
   script:
     - docker build -t $DOCKER_IMAGE:latest .
-    - docker tag $DOCKERIMAGE:latest $DOCKER_IMAGE/latest
+    - docker tag $DOCKER_IMAGE:latest $DOCKER_IMAGE:latest
 
 deploy:
   stage: deploy
   script:
-    - docker login -u "DOCKERHUB_USERNAME" -p "$DOCKER_PASSWORD"
-    - docker push $DOCKERIMAGE:latest
+    - docker login -u "DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD"
+    - docker push $DOCKER_IMAGE:latest

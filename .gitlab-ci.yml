@@ -13,5 +13,6 @@ build:
 
 deploy:
   stage: deploy
+  script:
     - docker login -u "DOCKERHUB_USERNAME" -p "$DOCKER_PASSWORD"
     - docker push $DOCKERIMAGE:latest

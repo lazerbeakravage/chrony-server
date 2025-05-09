@@ -12,8 +12,5 @@ build:
   stage: build
   script:
     - docker build -t $DOCKER_IMAGE:latest .
-
-push:
-  stage: push
     - echo "DOCKERHUB_TOKEN" | docker login -u "DOCKERHUB_USERNAME" --password-stdin
     - docker push $DOCKERIMAGE:latest

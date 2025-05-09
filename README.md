@@ -16,6 +16,7 @@ cmdport 0
 | ALLOWED_CLIENTS | Space (" ") separated list of ALLOWED clients in CIDR format | all clients | 192.168.1.0/24 192.168.2.0/24 |
 | DENIED_CLIENTS | Space (" ") separated list of DENIED clients in CIDR format | N/A | 192.168.1.0/24 192.168.2.0/24 |
 | ## REMOTE_PORT | Used for remote monitoring and control of the chronyd daemon by the chronyc utility.  Disabled by default | N/A | 323 |
+| MAKESTEP | Step the system clock instead of slewing it if the adjustment is larger than one second, but only in the first three clock updates. | 1 3 | |
 ||||
 
 ## docker-compose

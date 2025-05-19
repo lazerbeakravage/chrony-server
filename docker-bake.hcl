@@ -1,3 +1,5 @@
+# docker buildx bake --provenance=false --sbom=false
+
 group "default" {
   targets = ["chrony-server"]
 }

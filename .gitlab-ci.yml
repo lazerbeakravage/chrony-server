@@ -3,11 +3,14 @@ image: docker:latest
 services:
   - docker:dind
 
+tags:
+  - docker
+
 stages:
   - build
 
 variables:
-  DOCKER_IMAGE: lazerbeakravage/chrony-server
+  DOCKER_IMAGE: ghcr.io/lazerbeakravage/chrony-server
   DOCKER_HOST: tcp://localhost:2375
   DOCKER_TLS_CERTDIR: ""
 
@@ -20,3 +23,4 @@ build:
     - docker buildx create --use --name multiarch-builder
     - docker buildx inspect --bootstrap
     - docker buildx build --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE:latest --push .
+docker push ghcr.io/lazerbeakravage/chrony-server:latest

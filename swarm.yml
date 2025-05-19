@@ -1,7 +1,9 @@
 services:
   dialga:
-    image: lazerbeakravage/chrony-server:latest
+    image: ghcr.io/lazerbeakravage/chrony-server:latest
     hostname: dialga
+    networks:
+      zergrush-swarm:
     ports:
       - target: 123
         published: 123
@@ -12,3 +14,6 @@ services:
       # ALLOWED_CLIENTS: "10.55.10.0/24"
     cap_add:
       - SYS_TIME
+networks:
+  zergrush-swarm:
+    external: true

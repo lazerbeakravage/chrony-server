@@ -59,5 +59,5 @@ server2.zergrush.local          54      0   6   -    64       0      0   -     -
 172.18.0.1                     54      0   6   -    43       0      0   -     -
 server3.zergrush.local         54      0   6   -    30       0      0   -     -
 server4.zergrush.local         3      0  10   -   654       0      0   -     -
-behemoth.zergrush.local         3      0  10   -   384       0      0   -     -
+server5.zergrush.local         3      0  10   -   384       0      0   -     -
 ```

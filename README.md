@@ -54,10 +54,10 @@ docker exec -it $(docker ps -q --filter "name=chrony" ) chronyc clients
 admin@server:/mnt/docker/chrony$ docker exec -it $(docker ps -q --filter "name=chrony" ) chronyc clients
 Hostname                      NTP   Drop Int IntL Last     Cmd   Drop Int  Last
 ===============================================================================
-server1.zergrush.local       55      0   6   -    10       0      0   -     -
-server2.zergrush.local          54      0   6   -    64       0      0   -     -
+server1.zergrush.local         55      0   6   -    10       0      0   -     -
+server2.zergrush.local         54      0   6   -    64       0      0   -     -
 172.18.0.1                     54      0   6   -    43       0      0   -     -
 server3.zergrush.local         54      0   6   -    30       0      0   -     -
-server4.zergrush.local         3      0  10   -   654       0      0   -     -
-server5.zergrush.local         3      0  10   -   384       0      0   -     -
+server4.zergrush.local         3       0  10   -   654       0      0   -     -
+server5.zergrush.local         3       0  10   -   384       0      0   -     -
 ```

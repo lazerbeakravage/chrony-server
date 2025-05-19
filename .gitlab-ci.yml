@@ -15,7 +15,7 @@ build-multiarch:
     alias: docker
   before_script:
     - apk add --no-cache curl git bash
-    - echo "$GHCR_TOKEN" | docker login ghcr.io -username "$GHCR_USERNAME" --password-stdin
+    - echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
     - docker buildx create --use --name multiarch-builder --driver docker-container
     - docker buildx inspect --bootstrap
   script:

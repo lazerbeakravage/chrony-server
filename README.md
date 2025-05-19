@@ -26,16 +26,16 @@ cmdport 0
 
 #### <b>ntpq -pn</b>
 ```sh
-overlord@totodile:/mnt/docker/chrony$ ntpq -pn
+admin@server:/mnt/docker/chrony$ ntpq -pn
      remote                                   refid      st t when poll reach   delay   offset   jitter
 =======================================================================================================
-+10.55.10.55                             23.155.40.38     2 u    5   64  377   0.2578  -6.7002   2.0148
++192.168.1.123                           23.155.40.38     2 u    5   64  377   0.2578  -6.7002   2.0148
 +91.189.91.157                           132.163.96.1     2 u   74   64  376  11.0259   0.2089   1.2271
 ```
 
 ### <b>timedatectl</b>
 ```sh
-overlord@totodile:/mnt/docker/chrony$ timedatectl
+admin@server:/mnt/docker/chrony$ timedatectl
                Local time: Wed 2025-04-02 12:29:50 EDT
            Universal time: Wed 2025-04-02 16:29:50 UTC
                  RTC time: Wed 2025-04-02 16:29:50

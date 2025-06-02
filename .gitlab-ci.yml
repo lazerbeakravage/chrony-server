@@ -1,28 +1,60 @@
-stages:
-  - build
+# stages:
+#   - build
+
+# variables:
+#   DOCKER_HOST: tcp://docker:2375/
+#   DOCKER_DRIVER: overlay2
+#   DOCKER_TLS_CERTDIR: ""
+#   BUILDX_NO_DEFAULT_ATTESTATIONS: 1
+
+# build-multiarch:
+#   stage: build
+#   image: docker:24.0.6
+#   services:
+#   - name: docker:24.0.6-dind
+#     alias: docker
+#   before_script:
+#     - apk add --no-cache curl git bash
+#     - echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
+#     - docker buildx create --use --name multiarch-builder --driver docker-container
+#     - docker buildx inspect --bootstrap
+#   script:
+#     - docker buildx build --no-cache \
+#       --push \
+#       --provenance=false \
+#       --sbom=false \
+#       --platform linux/amd64,linux/arm64 \
+#       --tag ghcr.io/lazerbeakravage/telegraf-snmp:latest \
+#       .
+
+#######################################################
+
+default:
+  image: docker:latest
+  services:
+    - docker:dind
 
 variables:
-  DOCKER_HOST: tcp://docker:2375/
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
-  BUILDX_NO_DEFAULT_ATTESTATIONS: 1
+  GHCR_IMAGE: ghcr.io/lazerbeakravage/telegraf-snmp:latest
+  DOCKER_TAG: ${CI_COMMIT_SHA:0:8}
+  BUILDX_PLATFORMS: "linux/amd64,linux/arm64"
 
-build-multiarch:
-  stage: build
-  image: docker:24.0.6
-  services:
-  - name: docker:24.0.6-dind
-    alias: docker
+stages:
+  - build_and_push
+
+build_multiarch:
+  stage: build_and_push
+
   before_script:
-    - apk add --no-cache curl git bash
-    - echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
-    - docker buildx create --use --name multiarch-builder --driver docker-container
+    - echo "GHCR_TOKEN" | docker login ghcr.io -u "GHCR_USERNAME" --password-stdin
+    - docker buildx create --use --name multiarch-builder
     - docker buildx inspect --bootstrap
+
   script:
-    - docker buildx build --no-cache \
-      --push \
-      --provenance=false \
-      --sbom=false \
-      --platform linux/amd64,linux/arm64 \
-      --tag ghcr.io/lazerbeakravage/telegraf-snmp:latest \
+    - docker buildx build --no-cache
+      --platform ${BUILDX_PLATFORMS}
+      --tag ${GHCR_IMAGE}:latest
+      --push
       .

@@ -54,6 +54,8 @@ build_multiarch:
     - docker buildx inspect --bootstrap
   script:
     - docker buildx build --no-cache
+      --provenance=false
+      --sbom=false
       --platform ${BUILDX_PLATFORMS}
       --tag ${GHCR_IMAGE}
       --tag ${GHCR_IMAGE}

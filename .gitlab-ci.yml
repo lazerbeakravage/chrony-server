@@ -37,7 +37,7 @@ default:
 variables:
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
-  GHCR_IMAGE: ghcr.io/${GHCR_USERNAME}/chrony:latest
+  GHCR_IMAGE: ghcr.io/${GHCR_USERNAME}/chrony-server:latest
   DOCKER_TAG: ${CI_COMMIT_SHA:0:8}
   BUILDX_PLATFORMS: "linux/amd64,linux/arm64"
 

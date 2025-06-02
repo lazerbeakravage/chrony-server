@@ -46,12 +46,12 @@ stages:
 
 build_multiarch:
   stage: build_and_push
-
+  tags:
+    - docker
   before_script:
     - echo "GHCR_TOKEN" | docker login ghcr.io -u "GHCR_USERNAME" --password-stdin
     - docker buildx create --use --name multiarch-builder
     - docker buildx inspect --bootstrap
-
   script:
     - docker buildx build --no-cache
       --platform ${BUILDX_PLATFORMS}

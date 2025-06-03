@@ -1,34 +1,3 @@
-# stages:
-#   - build
-
-# variables:
-#   DOCKER_HOST: tcp://docker:2375/
-#   DOCKER_DRIVER: overlay2
-#   DOCKER_TLS_CERTDIR: ""
-#   BUILDX_NO_DEFAULT_ATTESTATIONS: 1
-
-# build-multiarch:
-#   stage: build
-#   image: docker:24.0.6
-#   services:
-#   - name: docker:24.0.6-dind
-#     alias: docker
-#   before_script:
-#     - apk add --no-cache curl git bash
-#     - echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
-#     - docker buildx create --use --name multiarch-builder --driver docker-container
-#     - docker buildx inspect --bootstrap
-#   script:
-#     - docker buildx build --no-cache \
-#       --push \
-#       --provenance=false \
-#       --sbom=false \
-#       --platform linux/amd64,linux/arm64 \
-#       --tag ghcr.io/lazerbeakravage/telegraf-snmp:latest \
-#       .
-
-#######################################################
-
 default:
   image: docker:latest
   services:
@@ -37,8 +6,8 @@ default:
 variables:
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
-  GHCR_IMAGE: ghcr.io/${GHCR_USERNAME}/chrony-server:latest
-  DOCKER_TAG: ${CI_COMMIT_SHA:0:8}
+  GHCR_IMAGE: ghcr.io/${GHCR_USERNAME}/chrony-server
+  DOCKER_SHA_TAG: ${CI_COMMIT_SHA:0:8}
   BUILDX_PLATFORMS: "linux/amd64,linux/arm64"
 
 stages:
@@ -53,11 +22,13 @@ build_multiarch:
     - docker buildx create --use --name multiarch-builder
     - docker buildx inspect --bootstrap
   script:
+    # provenance and sbom are needed to prevent unknown/unknown tags in github
+    # https://github.com/orgs/community/discussions/45969#discussioncomment-4852744
     - docker buildx build --no-cache
       --provenance=false
       --sbom=false
       --platform ${BUILDX_PLATFORMS}
-      --tag ${GHCR_IMAGE}
-      --tag ${GHCR_IMAGE}
+      --tag ${GHCR_IMAGE}:${DOCKER_SHA_TAG}
+      --tag ${GHCR_IMAGE}:latest
       --push
       .

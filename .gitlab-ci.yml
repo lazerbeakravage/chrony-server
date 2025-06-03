@@ -28,7 +28,7 @@ build_multiarch:
       --provenance=false
       --sbom=false
       --platform ${BUILDX_PLATFORMS}
-      --tag ${GHCR_IMAGE}:${DOCKER_SHA_TAG}
+      --tag ${GHCR_IMAGE}:${CI_COMMIT_SHA:0:8}
       --tag ${GHCR_IMAGE}:latest
       --push
       .

@@ -26,10 +26,10 @@ build_multiarch:
     # https://github.com/orgs/community/discussions/45969#discussioncomment-4852744
     - >
       docker buildx build
-        --provenance=false
-        --sbom=false
-        --platform ${BUILDX_PLATFORMS}
-        --tag ${GHCR_IMAGE}:${CI_COMMIT_SHA:0:8}
-        --tag ${GHCR_IMAGE}:latest
-        --push
-        .
+      --provenance=false
+      --sbom=false
+      --platform ${BUILDX_PLATFORMS}
+      --tag ${GHCR_IMAGE}:${CI_COMMIT_SHA:0:8}
+      --tag ${GHCR_IMAGE}:latest
+      --push
+      .

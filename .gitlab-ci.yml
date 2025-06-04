@@ -7,7 +7,7 @@ variables:
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
   GHCR_IMAGE: ghcr.io/${GHCR_USERNAME}/chrony-server
-  DOCKER_SHA_TAG: ${CI_COMMIT_SHA:0:8}
+  DOCKER_TAG: ${CI_COMMIT_SHA:0:8}
   BUILDX_PLATFORMS: "linux/amd64,linux/arm64"
 
 stages:
@@ -24,11 +24,12 @@ build_multiarch:
   script:
     # provenance and sbom are needed to prevent unknown/unknown tags in github
     # https://github.com/orgs/community/discussions/45969#discussioncomment-4852744
-    - docker buildx build --no-cache
-      --provenance=false
-      --sbom=false
-      --platform ${BUILDX_PLATFORMS}
-      --tag ${GHCR_IMAGE}:${CI_COMMIT_SHA:0:8}
-      --tag ${GHCR_IMAGE}:latest
-      --push
-      .
+    - >
+      docker buildx build
+        --provenance=false
+        --sbom=false
+        --platform ${BUILDX_PLATFORMS}
+        --tag ${GHCR_IMAGE}:${CI_COMMIT_SHA:0:8}
+        --tag ${GHCR_IMAGE}:latest
+        --push
+        .

@@ -50,5 +50,5 @@ jobs:
           provenance: false
           sbom: false
           tags: |
-            {{ steps.vars.outputs.ghcr_image_base }}:${{ steps.vars.outputs.short_sha }}
+            {{ steps.vars.outputs.ghcr_image_base }}:${{ github.short_sha }}
             {{ steps.vars.outputs.ghcr_image_base }}/${{ env.IMAGE_NAME }}:latest

@@ -22,7 +22,9 @@ jobs:
     steps:
       - name: Set image base name
         id: vars
-        run: echo "ghcr_image_base=ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ env.IMAGE_NAME }}" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "ghcr_image_base=ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ env.IMAGE_NAME }}" >> "$GITHUB_OUTPUT"
+          echo "short_sha=${GITHUB_SHA::8}" >> "$GITHUB_OUTPUT"
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -46,5 +48,5 @@ jobs:
           provenance: false
           sbom: false
           tags: |
-            ${{ steps.vars.outputs.ghcr_image_base }}:${{ github.sha }}
+            ${{ steps.vars.outputs.ghcr_image_base }}:${{ steps.vars.outputs.short_sha }}
             ${{ steps.vars.outputs.ghcr_image_base }}:latest

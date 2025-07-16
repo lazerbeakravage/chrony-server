@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Set image base name
         id: vars
-        run: echo "ghcr_image_base=ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ env.IMAGE_NAME }}" >> "GITHUB_OUTPUT"
+        run: echo "ghcr_image_base=ghcr.io/${{ secrets.GHCR_USERNAME }}/${{ env.IMAGE_NAME }}" >> "$GITHUB_OUTPUT"
 
       - name: Checkout repository
         uses: actions/checkout@v4

@@ -47,4 +47,4 @@ jobs:
           sbom: false
           tags: |
             ${{ steps.vars.outputs.ghcr_image_base }}:${{ github.sha }}
-            ${{ steps.vars.outputs.ghcr_image_base }}/${{ env.IMAGE_NAME }}:latest
+            ${{ steps.vars.outputs.ghcr_image_base }}:latest
